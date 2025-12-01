@@ -3,14 +3,14 @@ import argparse
 import time
 from typing import List
 
-from src.utils.io import read_input
+from src.utils.io import read_lines
 
 #!/usr/bin/env python3
 
 
 def main():
-    data = read_input()
-    if data == "":
+    data = read_lines("input.txt")
+    if not data:
         print(f"No input found.")
         return
 
