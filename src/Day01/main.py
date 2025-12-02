@@ -22,18 +22,27 @@ def main():
         direction = line[0]
         ammount = int(line[1:])
 
-        if direction == "R":
-            current_pos += ammount
-        if direction == "L":
-            current_pos -= ammount
+        full_turns = ammount // num_pos
+        num_zeros += full_turns
 
-        current_pos %= num_pos
+        partial_turns = ammount % num_pos
 
         if current_pos == 0:
             num_zeros += 1
 
+        if direction == "R":
+            if (current_pos + partial_turns) > num_pos and current_pos != 0:
+                num_zeros += 1
+            current_pos += ammount
+        if direction == "L":
+            if (current_pos - partial_turns) < 0 and current_pos != 0:
+                num_zeros += 1
+            current_pos -= ammount
+
+        current_pos %= num_pos
+
         print(
-            f"Direction: {direction}. Ammount: {ammount}. Current position: {current_pos}"
+            f"Rotation {line}. Current position: {current_pos}. Times at 0: {num_zeros}"
         )
 
     print(f"Number of times at 0: {num_zeros}")
